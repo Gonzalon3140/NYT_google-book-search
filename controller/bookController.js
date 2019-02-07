@@ -1,32 +1,28 @@
-const db = require("../models/books");
+const db = require("../models");
 
+// methods for bookController
 module.exports = {
+
     findAll: function (req, res) {
-        Book.find(req.query)
-            .then(book => res.status(422).json(err))
-            .catch(err => res.status(422).json(err))
+        db.Book
+            .find(req.query)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     },
-    findById: function (req, res) {
-        Book.find(req.params.id)
-            .then(book => res.json(book))
-            .catch(err => res.status(422).json(err))
-    },
+
     create: function (req, res) {
-        Book.create(req.body)
-            .then(book => res.json(book))
+        db.Book
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
-    update: function (req, res) {
-        Book.findOneAndUpdate({
-                id: req.params.id
-            }, req.body)
-            .then(book => res.json(book))
-            .catch(err => res.status(422).json(err));
-    },
-    delete: function (req, res) {
-        Books.findById(req.params.id)
-            .then(book => book.remove())
-            .then(book => res.json(book))
+    remove: function (req, res) {
+        db.Book
+            .findById({
+                _id: req.params.id
+            })
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
 };
