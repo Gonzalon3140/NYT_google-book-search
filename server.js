@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to Mongo DB
-var CONNECTION_URI = process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
+var CONNECTION_URI = process.env.MONGODB_URI || "mongodb://localhost/booksearch";
 
 mongoose.connect(CONNECTION_URI, {
     useMongoClient: true
